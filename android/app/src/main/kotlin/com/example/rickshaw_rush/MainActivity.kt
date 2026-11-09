@@ -1,0 +1,5 @@
+package com.example.rickshaw_rush
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity : FlutterActivity()
