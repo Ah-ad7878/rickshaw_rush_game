@@ -1,8 +1,9 @@
 import 'package:material_ui/material_ui.dart';
 
 class RoadPainter extends CustomPainter {
-  final double offset;
   RoadPainter(this.offset);
+
+  final double offset;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -38,8 +39,8 @@ class RoadPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(RoadPainter old) => old.offset != offset;
+  bool shouldRebuildSemantics(RoadPainter oldDelegate) => false;
 
   @override
-  bool shouldRebuildSemantics(RoadPainter oldDelegate) => false;
+  bool shouldRepaint(RoadPainter old) => old.offset != offset;
 }

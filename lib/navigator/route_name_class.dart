@@ -7,11 +7,11 @@ import 'package:rickshaw_rush/Screen/setting_page_two.dart';
 import 'package:rickshaw_rush/Screen/setting_screen.dart';
 
 class RouteNameClass {
-  static const String homeScreenRouteName = '/';
+  static const String gameOverScreenRouteName = '/gameOver';
   static const String gameScreenRouteName = '/gameScreen';
+  static const String homeScreenRouteName = '/';
   static const String settingScreenRouteName = '/setting';
   static const String settingScreenTwoRoutename = '/settingTwoScreen';
-  static const String gameOverScreenRouteName = '/gameOver';
 
   static Route<dynamic> generateRoute(RouteSettings setting) {
     if (setting.name == homeScreenRouteName) {

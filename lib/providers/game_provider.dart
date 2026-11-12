@@ -5,41 +5,51 @@ import 'package:material_ui/material_ui.dart';
 
 //konsa item ha road per
 class GameItem {
-  final int lane;
-  final bool isCoin;
-  final double height;
-  double y;
   GameItem({
     required this.lane,
     required this.isCoin,
     required this.height,
     required this.y,
   });
+
+  final double height;
+  final bool isCoin;
+  final int lane;
+  double y;
 }
 
 //value for run game
 class GameProvider extends ChangeNotifier {
-  int _highScore = 3000;
-  int _currentDistance = 0;
-  int _coins = 0;
-
-  int _currentLane = 1;
-  bool _isPaused = false;
-  bool _isGameOver = false;
-
-  double roadOffset = 0;
   final List<GameItem> items = [];
+  double roadOffset = 0;
 
-  Timer? _timer;
-  final Random _rng = Random();
+  int _coins = 0;
+  int _currentDistance = 0;
+  int _currentLane = 1;
   double _exactMeters = 0;
+  int _highScore = 3000;
+  bool _isGameOver = false;
+  bool _isPaused = false;
+  final Random _rng = Random();
   double _spawnGap = 0;
+  Timer? _timer;
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 
   int get highScore => _highScore;
+
   int get currentDistance => _currentDistance;
+
   int get coins => _coins;
+
   int get currentLane => _currentLane;
+
   bool get isPaused => _isPaused;
+
   bool get isGameOver => _isGameOver;
 
   //game start karni ka function
@@ -115,23 +125,6 @@ class GameProvider extends ChangeNotifier {
     });
   }
 
-  void _spawnPattern(double carHeight, double coinSize) {
-    final freeLane = _rng.nextInt(3);
-    for (var lane = 0; lane < 3; lane++) {
-      if (lane == freeLane) {
-        if (_rng.nextDouble() < 0.6) {
-          items.add(
-            GameItem(lane: lane, isCoin: true, height: coinSize, y: -coinSize),
-          );
-        }
-      } else if (_rng.nextDouble() < 0.55) {
-        items.add(
-          GameItem(lane: lane, isCoin: false, height: carHeight, y: -carHeight),
-        );
-      }
-    }
-  }
-
   void stopGame() => _timer?.cancel();
 
   //left lane per jani kii lia
@@ -181,9 +174,20 @@ class GameProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
+  void _spawnPattern(double carHeight, double coinSize) {
+    final freeLane = _rng.nextInt(3);
+    for (var lane = 0; lane < 3; lane++) {
+      if (lane == freeLane) {
+        if (_rng.nextDouble() < 0.6) {
+          items.add(
+            GameItem(lane: lane, isCoin: true, height: coinSize, y: -coinSize),
+          );
+        }
+      } else if (_rng.nextDouble() < 0.55) {
+        items.add(
+          GameItem(lane: lane, isCoin: false, height: carHeight, y: -carHeight),
+        );
+      }
+    }
   }
 }

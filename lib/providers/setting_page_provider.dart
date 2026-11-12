@@ -2,9 +2,15 @@ import 'package:just_audio/just_audio.dart';
 import 'package:material_ui/material_ui.dart';
 
 class SettingPageProvider extends ChangeNotifier {
-  bool _isSound = true;
   final AudioPlayer _audioPlayer = AudioPlayer();
   bool _initialize = false;
+  bool _isSound = true;
+
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
+  }
 
   bool get sound => _isSound;
 
@@ -33,11 +39,5 @@ class SettingPageProvider extends ChangeNotifier {
       await _audioPlayer.pause();
     }
     notifyListeners();
-  }
-
-  @override
-  void dispose() {
-    _audioPlayer.dispose();
-    super.dispose();
   }
 }

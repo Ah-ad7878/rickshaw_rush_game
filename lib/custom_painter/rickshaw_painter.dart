@@ -68,8 +68,8 @@ class RickshawPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(RickshawPainter oldDelegate) => false;
+  bool shouldRebuildSemantics(RickshawPainter oldDelegate) => false;
 
   @override
-  bool shouldRebuildSemantics(RickshawPainter oldDelegate) => false;
+  bool shouldRepaint(RickshawPainter oldDelegate) => false;
 }

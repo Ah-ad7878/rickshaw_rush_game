@@ -19,23 +19,28 @@ class _PlayScreenState extends State<PlayScreen> {
   bool _started = false;
 
   @override
+  void dispose() {
+    _game.stopGame();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
 
     _game = context.read<GameProvider>();
   }
 
-  @override
-  void dispose() {
-    _game.stopGame();
-    super.dispose();
-  }
-
   double get _carW => 70.w;
+
   double get _carH => 100.h;
+
   double get _coinSize => 30.w;
+
   double get _rickW => 65.w;
+
   double get _rickH => 75.h;
+
   double get _rickBottom => 60.h;
 
   double _leftFor(int lane, double areaWidth, double itemWidth) {
